@@ -5,6 +5,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+// use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Solicitacao extends Model
 {
@@ -25,9 +27,8 @@ class Solicitacao extends Model
         return $this->belongsTo(Fornecedor::class, 'forn_id');
     }
 
-
-    public function produtos() {
-        return $this->hasMany(Produto::class, 'soli_id');
+    public function produtos(){
+        return $this->BelongsToMany(Produto::class);
     }
 
 }

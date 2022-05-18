@@ -13,4 +13,9 @@ class Produto extends Model
 
     protected $fillable = ['produtos'];
 
+    public function solicitacao()
+    {
+        return $this->belongsToMany(Solciitacao::class);
+    }
+
 }
