@@ -36,11 +36,13 @@
                                                         <th scope="col">Valor</th>
                                                     </tr>
                                                 </thead>
-                                                @foreach($produtos as $fim_prod)
+                                                @foreach($solicitacoes as $fim_soli)
                                                     <tr class="text-white">
-                                                        <td>{{ $fim_prod->id}}</td>
-                                                        <td>{{$fim_prod->name}}</td>
-                                                        <td>{{$fim_prod->valor}}</td>
+                                                        <div name="ID">
+                                                            <td>{{ $fim_soli->id}}</td>
+                                                        </div>
+                                                        <td>{{$fim_soli->forn_id}}</td>
+                                                        <td>{{$fim_soli->data}}</td>
                                                     </tr>
                                                 @endforeach
                                             </table>

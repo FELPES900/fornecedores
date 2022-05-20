@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Soli_Prod;
+use App\Models\Solicitacao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SoliProdController extends Controller
@@ -23,13 +25,17 @@ class SoliProdController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() // 1
+    public function create(Request $request, Solicitacao $solicitacao) // 1
     {
 
-        // $soli_prod = DB::table('solicitacoes_produtos')->get();
-        $produtos = DB::table('produtos')->get();
+        // $id = Auth::user()->id;
+        // $soli_prod = DB::select("SELECT * FROM solicitacoes_produtos WhERE soli_id = '$id'");
+        $solicitacao = DB::table('solicitacao')->get();
+        $soli_prod = DB::table('solicitacoes_produtos')->get();
 
-        return response()->view('soli_prod.create', compact('produtos'));
+        if ($solicitacao->id == $soli_prod->soli_id ) {
+            return response()->view('soli_prod.create', compact('solicitacao'));        
+        }
     }
 
     /**
@@ -40,7 +46,11 @@ class SoliProdController extends Controller
      */
     public function store(Request $request) // 2
     {
-        //
+        $request->validate([
+            'ID' => 'required'
+        ]);
+
+        // $soli_prod
     }
 
     /**
