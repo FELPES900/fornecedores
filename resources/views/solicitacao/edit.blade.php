@@ -57,6 +57,14 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <div style="margin-top: 30px" class="row">
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="buttom" class="btn btn-outline-light btn-lg px-5">
+                                                <a class="text-decoration-none text-white"
+                                                    href=" {{ route('soli_prod.create') }} ">Adicionar Produto</a>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

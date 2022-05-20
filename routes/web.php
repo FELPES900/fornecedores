@@ -3,6 +3,7 @@
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SolicitacaoController;
+use App\Http\Controllers\SoliProdController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,5 @@ Route::get('/layout', function () {
 Route::resource('fornecedores', FornecedorController::class);
 Route::resource('solicitacao', SolicitacaoController::class);
 Route::resource('produtos', ProdutoController::class);
+Route::resource('soli_prod', SoliProdController::class);
 // Route::resource('fornecedores', FornecedorController::class)->except('destroy');

@@ -39,7 +39,7 @@ class SolicitacaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() // primeito passo
     {
         $fornecedores = DB::table('fornecedores')->get();
 
@@ -52,7 +52,7 @@ class SolicitacaoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) // segundo passo
     {
 
         // dd($request);

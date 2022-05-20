@@ -42,7 +42,7 @@
                                                 for="typeEmailX">Unidade</label>
                                             <select class="form-select" aria-label="Default select example"
                                                 name="unidade" id="">
-                                                <option value="" selected>Selecione a nova unidade de medida</option>
+                                                <option value="" selected>Selecione uma nova unidade de medida</option>
                                                 @foreach ($pordutosUni as $uni_fim)
                                                     <option value="{{ $uni_fim }}">
                                                         {{$uni_fim}}
