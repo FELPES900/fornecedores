@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 // use App\Models\Fornecedor;
+
+use App\Models\Produto;
 use App\Models\Solicitacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -90,15 +92,16 @@ class SolicitacaoController extends Controller
      * @param  \App\Models\Solicitacao  $solicitacao
      * @return \Illuminate\Http\Response
      */
-    public function edit(Solicitacao $fim_soli, $id)
+    public function edit(Solicitacao $solicitacao)
     {
-        $fim_soli = Solicitacao::findOrFail($id);
         $fornecedores = DB::table('fornecedores')->get();
+
         // $produtos = DB::table('produtos')->where('soli_id', '=', "$fim_soli->id")->get();   
         // $produtos = $fim_soli->produtos;   
         // dd($produtos);
+        $solicitacao->load('produtos');
 
-        return view('solicitacao.edit', compact('fim_soli','fornecedores'));
+        return view('solicitacao.edit', compact('solicitacao','fornecedores'));
     }
 
     /**

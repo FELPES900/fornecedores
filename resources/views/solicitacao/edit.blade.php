@@ -25,7 +25,7 @@
                                 <br>
                                 <div class="form-outline form-white mb-4">
                                     <form class="form-horizontal" method="POST"
-                                        action="{{ route('solicitacao.update', $fim_soli->id) }}">
+                                        action="{{ route('solicitacao.update', $solicitacao->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="row align-items-start">
@@ -37,7 +37,7 @@
                                                             aria-label="Default select example" name="selecione">
                                                             @foreach ($fornecedores as $fornecedor)
                                                                 <option value="{{ $fornecedor->id }}"
-                                                                    @selected($fim_soli->fornecedor->id === $fornecedor->id)>
+                                                                    @selected($solicitacao->fornecedor->id === $fornecedor->id)>
                                                                     {{ $fornecedor->fornecedores }}
                                                                 </option>
                                                             @endforeach
@@ -47,9 +47,9 @@
                                             </div>
                                             <div class="col-3">
                                                 <label class="form-label" for="typeEmailX">Data</label>
-                                                <input type="date" class="form-control" id="fim_soli" name="data"
+                                                <input type="date" class="form-control" id="solicitacao" name="data"
                                                     placeholder="Date"
-                                                    value="{{ $fim_soli->getRawOriginal('data') ?? \Carbon\Carbon::today()->format('Y-m-d') }}">
+                                                    value="{{ $solicitacao->getRawOriginal('data') ?? \Carbon\Carbon::today()->format('Y-m-d') }}">
                                             </div>
                                             <div class="col-2 align-self-end">
                                                 <button type="submit"
@@ -61,10 +61,33 @@
                                         <div class="col-12 d-flex justify-content-end">
                                             <button type="buttom" class="btn btn-outline-light btn-lg px-5">
                                                 <a class="text-decoration-none text-white"
-                                                    href=" {{ route('soli_prod.create') }} ">Adicionar Produto</a>
+                                                    href=" {{ route('soli_prod.create',$solicitacao->id) }} ">Adicionar Produto</a>
                                             </button>
                                         </div>
                                     </div>
+                                    <br>
+                                    <div class="d-flex justify-content-center">
+                                        <h2 class="mt-4 fw-bold mb-2 text-uppercase">PRODUTOS</h2>
+                                    </div>
+                                    <table class="table table-dark table-striped">
+                                        <br>
+                                        <thead class="text-white">
+                                            <tr>
+                                                <th scope="col">Codigo</th>
+                                                <th scope="col">Produto</th>
+                                                <th scope="col">Unidade</th>
+                                                <th scope="col">Valor</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($solicitacao->produtos as $fim_produtos)
+                                            <tr class="text-white">
+                                                <td>{{$fim_produtos->id}}</td>
+                                                <td>{{$fim_produtos->name}}</td>
+                                                <td>{{$fim_produtos->unidade}}</td>
+                                                <td>{{$fim_produtos->valor}}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
                                 </div>
                             </div>
                         </div>

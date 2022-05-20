@@ -32,5 +32,14 @@ Route::get('/layout', function () {
 Route::resource('fornecedores', FornecedorController::class);
 Route::resource('solicitacao', SolicitacaoController::class);
 Route::resource('produtos', ProdutoController::class);
-Route::resource('soli_prod', SoliProdController::class);
+// Route::resource('soli_prod', SoliProdController::class);
+
+Route::prefix('solicitacoes/{solicitacao}/soli_prod')
+    ->name('soli_prod.')    
+    ->group(function() {
+    Route::get('create', [SoliProdController::class, 'create'])->name('create');
+    Route::post('create', [SoliProdController::class, 'store'])->name('store');
+    Route::delete('destroy', [SoliProdController::class, 'destroy'])->name('destroy');
+});
+
 // Route::resource('fornecedores', FornecedorController::class)->except('destroy');

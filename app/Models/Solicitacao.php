@@ -28,7 +28,7 @@ class Solicitacao extends Model
     }
 
     public function produtos(){
-        return $this->BelongsToMany(Produto::class);
+        return $this->BelongsToMany(Produto::class, 'solicitacoes_produtos', 'soli_id', 'prod_id');
     }
 
 }

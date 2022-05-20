@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Soli_Prod;
 use App\Models\Solicitacao;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SoliProdController extends Controller
@@ -30,12 +28,21 @@ class SoliProdController extends Controller
 
         // $id = Auth::user()->id;
         // $soli_prod = DB::select("SELECT * FROM solicitacoes_produtos WhERE soli_id = '$id'");
-        $solicitacao = DB::table('solicitacao')->get();
-        $soli_prod = DB::table('solicitacoes_produtos')->get();
+        // $soli_prod = DB::table('solicitacoes_produtos')->get();
 
-        if ($solicitacao->id == $soli_prod->soli_id ) {
-            return response()->view('soli_prod.create', compact('solicitacao'));        
-        }
+        // dd($solicitacao->produtos);
+        // $produto = Produto::find(4);
+        $produtos = DB::table('produtos')->get();
+        
+        // $solicitacao->produtos()->attach($produto);
+        // $solicitacao->produtos()->detach($produto);
+
+        // insert into soli_prod soli_id, prod_id values (1,4); 
+
+        // dd($solicitacao->refresh()->load('produtos'));
+
+        return response()->view('soli_prod.create', compact('solicitacao','produtos'));        
+        
     }
 
     /**
@@ -44,13 +51,22 @@ class SoliProdController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) // 2
+    public function store(Request $request, Solicitacao $solicitacao) // 2
     {
+        // dd($solicitacao);
         $request->validate([
-            'ID' => 'required'
+            // 'solicitacao' => 'required',
+            'produto' => 'required'
         ]);
 
-        // $soli_prod
+        // $solicitacao->id = $request->input("produto");
+        $solicitacao->produtos()->attach($request->produto);
+        $solicitacao->save();
+
+        // dd($request);
+
+        // return response()->view('soli_prod.create');
+        return redirect(route('soli_prod.create',$solicitacao->id));
     }
 
     /**
@@ -59,7 +75,7 @@ class SoliProdController extends Controller
      * @param  \App\Models\Soli_Prod  $soli_Prod
      * @return \Illuminate\Http\Response
      */
-    public function show(Soli_Prod $soli_Prod)
+    public function show()
     {
         //
     }
@@ -70,7 +86,7 @@ class SoliProdController extends Controller
      * @param  \App\Models\Soli_Prod  $soli_Prod
      * @return \Illuminate\Http\Response
      */
-    public function edit(Soli_Prod $soli_Prod)
+    public function edit()
     {
         //
     }
@@ -82,7 +98,7 @@ class SoliProdController extends Controller
      * @param  \App\Models\Soli_Prod  $soli_Prod
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Soli_Prod $soli_Prod)
+    public function update(Request $request)
     {
         //
     }
@@ -93,8 +109,12 @@ class SoliProdController extends Controller
      * @param  \App\Models\Soli_Prod  $soli_Prod
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Soli_Prod $soli_Prod)
+    public function destroy($id)
     {
-        //
+        $solicitacao = Solicitacao::findOrFail($id);
+
+        if($solicitacao->delete()){
+            return redirect(route('soli_prod.create',$solicitacao->id));
+        }
     }
 }
