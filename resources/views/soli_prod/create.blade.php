@@ -47,8 +47,9 @@
                                                                 @csrf
                                                                 {{ method_field('DELETE') }}
                                 
+                                                                <input type="hidden" name="idProduto" value="{{ $fim_soli->id}}">
                                                                 <button type="submit" class="btn btn-danger"
-                                                                    onclick="return confirm('Tem certeza que deseja excluir o Fornecedor?')">Deletar</button>
+                                                                    onclick="return confirm('Tem certeza que deseja excluir o produto?')">Deletar</button>
                                 
                                                             </form>
                                                             {{-- <form style="display: inline" action="{{ route('solicitacao.destroy', $fim_soli->id) }}"

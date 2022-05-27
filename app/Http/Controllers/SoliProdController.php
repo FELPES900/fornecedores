@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produto;
 use App\Models\Solicitacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -109,12 +110,14 @@ class SoliProdController extends Controller
      * @param  \App\Models\Soli_Prod  $soli_Prod
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Solicitacao $solicitacao)
     {
-        $solicitacao = Solicitacao::findOrFail($id);
+        $idProduto = request()->input('idProduto');
 
-        if($solicitacao->delete()){
-            return redirect(route('soli_prod.create',$solicitacao->id));
-        }
+        // dd(request()->input());
+        $solicitacoes = DB::table("solicitacoes_produtos")->where(['soli_id'=> $solicitacao->id, 'prod_id'=> $idProduto])->delete();
+
+        // dd($solicitacoes);
+       return redirect()->route('soli_prod.create',$solicitacao->id);
     }
 }
