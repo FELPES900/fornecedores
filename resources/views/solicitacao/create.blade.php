@@ -48,7 +48,7 @@
                                             <label class="form-label" for="typeEmailX">Data</label>
                                             <input type="date" class="form-control" id="fim_soli" name="data"
                                                 placeholder="Date"
-                                                value="{{ old('data') ?? \Carbon\Carbon::today()->format('Y-m-d') }}">
+                                                value="{{ old('data') ?? \Carbon\Carbon::today()->format('Y-m-d') }}" formatdat>
                                             <br>
                                         </div>
                                         <button type="submit" class="btn btn-outline-light btn-lg px-5">Salvar</button>
